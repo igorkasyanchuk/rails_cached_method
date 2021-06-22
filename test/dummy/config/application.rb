@@ -20,3 +20,9 @@ module Dummy
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+
+puts "===" * 20
+puts "===" * 20
+puts "ATTENTION: CACHING IS ENABLED IN DEV MODE IN CONFIGS!!!"
+puts "===" * 20
+puts "===" * 20

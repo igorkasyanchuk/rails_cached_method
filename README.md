@@ -1,4 +1,4 @@
-# RailsCachedMethod
+# Rails Cached Method
 Short description and motivation.
 
 ## Usage
@@ -20,6 +20,10 @@ Or install it yourself as:
 ```bash
 $ gem install rails_cached_method
 ```
+
+## TODO
+
+- think if rails dependency could be replaced with something more lightweight
 
 ## Contributing
 Contribution directions go here.

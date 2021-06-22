@@ -46,7 +46,7 @@ module RailsCachedMethod
   end
 
   module CachedProxyExt
-    def cached(key: nil, expires_in: 1.hour)
+    def cached(key: nil, expires_in: 1.minute)
       CacheedProxy.new(self, key: key, expires_in: expires_in)
     end
   end
