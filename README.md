@@ -2,6 +2,7 @@
 
 Simple way to cache results of methods. Using `Rails.cache` inside with default expiration time of 1 minute.
 
+![Demo](docs/rails_cached_method.png)
 
 ## Usage
 
