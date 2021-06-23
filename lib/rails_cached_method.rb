@@ -3,9 +3,13 @@ require "rails_cached_method/railtie"
 
 module RailsCachedMethod
   class CachedProxy
+    # disable warning of redefining __send__ and __object_id__
+    old = $VERBOSE.dup
+    $VERBOSE = nil
     Object.methods.each do |e|
       delegate e, to: :@__object__
     end
+    $VERBOSE = old
 
     def initialize(object, key: nil, expires_in:, parent_key: nil, recache: false)
       @__object__     = object
