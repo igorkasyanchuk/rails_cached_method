@@ -38,6 +38,58 @@ key - you can set your key.
 expires_in - TTL of cached object.
 recache - should be key deleted and cached again.
 
+## How it works
+
+After you call `.cached` it will generate a cache key and store value in Rails.cache. Value is class which is wrapps original value and allow you to call methods on the value using `method_missing`. Every result is cached again and again. So on every method call in methods chain every result will be stored in Rails.cache.
+
+To get original value you can call `.__value__`.
+
+Some pieces of code to show you how it works:
+
+```
+    def cached(key: nil, expires_in: 1.minute, recache: false)
+      CachedProxy.new(
+        self,
+        key: key,
+        expires_in: expires_in,
+        recache: recache
+      )
+    end
+# ---------------------------------------------------------------
+    class CachedProxy
+
+    Object.methods.each do |e|
+      delegate e, to: :@__object__
+    end
+    
+    def method_missing(*args)
+      key = ___compose_key__(args)
+      if @__recache__
+        Rails.cache.delete(key)
+      end
+      Rails.cache.fetch(key, expires_in: @__expires_in__) do
+        CachedProxy.new(
+          @__object__.send(*args),
+          expires_in: @__expires_in__,
+          recache: @__recache__,
+          parent_key: key,
+        )
+      end
+    end    
+    private
+    def ___compose_key__(args)
+      result = [@__parent_key__, @__key__]
+      result += if @__object__.respond_to?(:to_global_id)
+        [@__object__.to_global_id]
+      elsif @__object__.is_a?(ActiveRecord::Relation)
+        [@__object__.class]
+      else
+        [@__object__]
+      end
+      result += args[0..1]
+      result.compact.map(&:to_s).join('.').dasherize
+    end
+```    
 
 ## Installation
 Add this line to your application's Gemfile:
