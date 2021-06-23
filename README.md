@@ -9,10 +9,10 @@ Simple way to cache results of methods. Using `Rails.cache` inside with default 
 To get a value and cache it just write a code like:
 
 ```ruby
-User.cached.admins
-post.cached.comments.last
-User.cached.where(role: :moderator).count
-Project.cached.first.some_heavey_method
+User.cached.admins # get list of admins and automatically put them in cache with 1 minute TTL
+post.cached.comments.last # get last comment from the post and cache it
+User.cached.where(role: :moderator).count # cache moderators count
+Project.cached.first.some_heavey_method # cache result of some_heavey_method for first Project (if first is Project.first)
 ```
 
 So basically just call method `cached` on any object. It will wrap and cache **every** result from the next method call. So every result from method chain is cached.
