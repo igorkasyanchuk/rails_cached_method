@@ -49,7 +49,7 @@ recache - should be key deleted and cached again.
     page
 ```    
     
-
+2) Rails.cache.clear in specs before(:suite) or concrete spec
 
 
 ## How it works
