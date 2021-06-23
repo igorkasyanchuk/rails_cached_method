@@ -46,7 +46,7 @@ To get original value you can call `.__value__`.
 
 Some pieces of code to show you how it works:
 
-```
+```ruby
     def cached(key: nil, expires_in: 1.minute, recache: false)
       CachedProxy.new(
         self,
