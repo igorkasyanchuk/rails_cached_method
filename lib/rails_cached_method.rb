@@ -23,10 +23,10 @@ module RailsCachedMethod
     def method_missing(*args)
       key = ___compose_key__(args)
       if @__recache__
-        puts "deleting: #{key}"
+        #puts "deleting: #{key}"
         Rails.cache.delete(key)
       end
-      puts "key: #{key}, expires_in: #{@__expires_in__}, args: #{args}, recache: #{@__recache__}"
+      #puts "key: #{key}, expires_in: #{@__expires_in__}, args: #{args}, recache: #{@__recache__}"
       Rails.cache.fetch(key, expires_in: @__expires_in__) do
         CachedProxy.new(
           @__object__.send(*args),
