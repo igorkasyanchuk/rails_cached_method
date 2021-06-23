@@ -38,6 +38,20 @@ key - you can set your key.
 expires_in - TTL of cached object.
 recache - should be key deleted and cached again.
 
+## Tips & Tricks
+
+1) use `if page.present?` to check if value is really present. Because every value is wrapped in a class if statement can work incorrectly
+```ruby
+    page = Page.cached.find_by(identifier: identifier)
+    return page if page # change to return page if page.present?
+    page = Page.new(identifier: identifier, title: identifier)
+    page.save(validate: false)
+    page
+```    
+    
+
+
+
 ## How it works
 
 After you call `.cached` it will generate a cache key and store value in Rails.cache. Value is class which is wrapps original value and allow you to call methods on the value using `method_missing`. Every result is cached again and again. So on every method call in methods chain every result will be stored in Rails.cache.
