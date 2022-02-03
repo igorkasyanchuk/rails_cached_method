@@ -1,5 +1,8 @@
 # Rails Cached Method
 
+[![RailsJazz](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/my_other.svg?raw=true)](https://www.railsjazz.com)
+[![https://www.patreon.com/igorkasyanchuk](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/patron.svg?raw=true)](https://www.patreon.com/igorkasyanchuk)
+
 Simple way to cache results of methods. Using `Rails.cache` inside with default expiration time of 1 minute.
 
 ![Demo](docs/rails_cached_method.png)
